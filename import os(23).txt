@@ -1,0 +1,85 @@
+import os
+
+# Function to clear the console screen
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+# Function to display the Tic Tac Toe board
+
+def display_board(board):
+    clear_screen()
+
+print(" {} | {} | {}".format(board[0] [0], board[0][1], board[0][2]))
+print(" ---+---+---")
+print(" {} | {} | {}".format(board[1] [0], board[1][1], board[1][2]))
+print(" ---+---+---")
+print(" {} | {} | {}".format(board[2] [0], board[2][1], board[2][2]))
+print()
+
+# Function to check if someone has won
+def check_win(board, player):
+    for row in board:
+        if all([cell == player for cell in row]):
+            return True
+    for col in range(3):
+        if all([board[row][col] == player for row in range(3)]):
+            return True
+    if all ([board[i][i] == player for i in range(3)]) or all ([board[i] [2-i] == player for i in range(3)]):
+        return True
+    return False
+
+# Function to check if the board is full (tie)
+def check_tie(board):
+    for row in board:
+        for cell in row:
+            if cell == '':
+                return False
+    return True
+
+# Function to initialize the board.
+def initialize_board():
+    return [['' for in range(3)] for in range(3)]
+
+# Function to start a new game
+def play_game():
+    board initialize_board()
+    current_player = 'X'
+    game over False
+
+    while not game_over: display_board(board) 
+    print (f"Player (current_player)'s. turn")
+    row = int(input("Enter row (0, 1, or 2): ")) 
+    col int(input("Enter column (0, 1, or 2): "))
+
+    #Check if the cell is empty
+    if board[row][col] == 
+       board[row][col] = current_player
+
+       #Check if the current player wins 
+       if check_win(board, current_player): 
+          display_board(board)
+          print (f"Player (current player) wins!")
+          game_over = True
+      elif check_tie(board):
+           display_board(board)
+           print("It's a tie!")
+           game_over True
+       else:
+           #Switch to the other player 
+           current_player 'o' if current_player == 'X' else 'x'
+
+    else:
+          print("That cell is already taken. Try again.")
+
+  play_again input("Do you want to play again? (yes/no): ").lower()
+  return play_again.startswith('y')
+
+#Main game loop
+def main():
+    play = True
+    while play:
+        play = play_game()
+
+    print("Thanks for playing !")
+if __name__ == "__main__":
+    main()
